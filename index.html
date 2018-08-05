@@ -31,12 +31,19 @@
         </div>
 
         <div id="path1" class="arrow"></div>
-        <div id="path2" class="two2one">
+        <div id="path2" class="two-one">
             <div class="arrow"></div>
         </div>
         <div id="path3" class="arrow"></div>
         <div id="path4" class="arrow"></div>
-        <div id="path5" class="one2three">
+        <div id="path5" class="one-three">
+            <div class="arrow"></div>
+            <div class="arrow"></div>
+            <div class="arrow"></div>
+        </div>
+        <div id="path6" class="three-one">
+            <div class="part"></div>
+            <div class="part"></div>
             <div class="arrow"></div>
         </div>
 
@@ -156,7 +163,7 @@ let data = () => {
                 src: 'images/img_hammer.png',
                 desc: '其實就是設計草稿，只是在產品設計上為了更擬真，一般指的線框稿(Wireframe)都會是需要可以點擊交互的，製作線框稿的目的著重在畫面間的流程與操作，並透過這份由簡單線條與去視覺化的草圖去與工程師、專案經理等團隊成員溝通，確保大家對產品最後的想像是一致的。',
                 siblings: [],
-                children: ['skill7', 'skill8', 'skill9'],
+                children: ['skill7', 'skill8', 'skill9', 'skill10', 'skill11', 'skill12'],
                 path: 'path5'
             },
             {
@@ -167,7 +174,67 @@ let data = () => {
                 desc: '插畫在今年的網頁視覺上存在感愈來愈重，愈來愈多的科技公司官網及產品流程皆採用插畫來取代以往的扁平、簡約風格，像是 Slack 、Dropbox跟 Shopify等，帶來更有溫度的使用體驗，而且也更有趣，如果你是平面設計出身或本來就喜歡插畫，在設計介面的時候可以選擇自產素材，創作更具備個人風格的作品。',
                 siblings: ['skill8', 'skill9', 'skill10', 'skill11', 'skill12'],
                 children: ['skill13'],
+                path: ''
+            },
+            {
+                id: 'skill8',
+                name: '美感',
+                src: 'images/img_sense.png',
+                status: 'off',
+                desc: '不論是什麼樣的數位產品(Web , App⋯等)，視覺都是接觸用戶的第一道關卡，每個物件的陰影、大小到圓角的處理，以及每個項目之間的間距及整體配色，都是魔鬼的關鍵細節，也是設計師的基本素養。',
+                siblings: ['skill7', 'skill9', 'skill10', 'skill11', 'skill12'],
+                children: ['skill13'],
+                path: ''
+            },
+            {
+                id: 'skill9',
+                name: '靈感',
+                src: 'images/img_inspiration.png',
+                status: 'off',
+                desc: '蘋果打到牛頓的頭，達文西賞鳥展翅，這些靈光乍現的瞬間對設計師來說是稀貴的寶石，只是靈感不單是稍縱即逝的瞬間，也是自發的學習勉強積累。',
+                siblings: ['skill7', 'skill8', 'skill10', 'skill11', 'skill12'],
+                children: ['skill13'],
+                path: ''
+            },
+            {
+                id: 'skill10',
+                name: '配色',
+                src: 'images/img_color.png',
+                status: 'off',
+                desc: '許多公司或品牌會定義出 VI(企業視覺識別)，其中可能涵蓋了主要的色碼，但大多是平面設計適用，但網頁上由於多了互動操作的部分，需要更多用色靈活性，像是漸層、陰影、Hover及Click的轉換⋯，等。',
+                siblings: ['skill7', 'skill8', 'skill9', 'skill11', 'skill12'],
+                children: ['skill13'],
                 path: 'path6'
+            },
+            {
+                id: 'skill11',
+                name: '文案',
+                src: 'images/img_text.png',
+                status: 'off',
+                desc: '雖然說文案可能已經有其他部門會準備，但更常遇到的狀況是，他們也不知道你製作網頁會需要什麼樣的內容，或是今天是你要獨自完成一個網站的上架',
+                siblings: ['skill7', 'skill8', 'skill9', 'skill10', 'skill12'],
+                children: ['skill13'],
+                path: 'path6'
+            },
+            {
+                id: 'skill12',
+                name: '圖庫',
+                src: 'images/img_pictures.png',
+                status: 'off',
+                desc: '網頁中會用到大量的實拍照片、或是作為背景的情境照，如果客戶那邊提供的素材不盡人意，這時候你就得自己準備了，作好美美的設計稿才能夠有說服力。',
+                siblings: ['skill7', 'skill8', 'skill9', 'skill10', 'skill11'],
+                children: ['skill13'],
+                path: 'path6'
+            },
+            {
+                id: 'skill13',
+                name: 'UI 設計',
+                src: 'images/img_axe.png',
+                status: 'off',
+                desc: '終於進入到介面設計的環節啦！前面的些準備及技巧，都是為了在這一階段能有更精彩的表現，坦白說現在的 UI 設計軟體的操作愈做愈簡單，功能也幾乎愈來愈像，挑一款適合你的工具就可以囉。',
+                siblings: ['skill8', 'skill9', 'skill10', 'skill11', 'skill12'],
+                children: ['skill13'],
+                path: ''
             }
         ],
         currentDesc: {
@@ -193,7 +260,7 @@ let vm = new Vue({
 
                 // turn on path of clicked skill
                 let pathToOpen = curSkill.path
-                document.getElementById(pathToOpen).classList.add('on')
+                document.getElementById(pathToOpen).classList.add('path-on')
 
                 // turn on children of clicked skill, if clicked skill is already on
                 let children = curSkill.children

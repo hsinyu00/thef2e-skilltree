@@ -111,8 +111,32 @@ body {
     top: 100px;
 }
 #skill7 {
-    left: 400px;
+    left: 415px;
     top: 0;
+}
+#skill8 {
+    left: 415px;
+    top: 100px;
+}
+#skill9 {
+    left: 415px;
+    top: 200px;
+}
+#skill10 {
+    left: 485px;
+    top: 0;
+}
+#skill11 {
+    left: 485px;
+    top: 100px;
+}
+#skill12 {
+    left: 485px;
+    top: 200px;
+}
+#skill13 {
+    left: 610px;
+    top: 100px;
 }
 
 @mixin path-on() {
@@ -138,14 +162,14 @@ body {
         right: -15px;
         top: -5px;
     }
-    &.on {
+    &.path-on {
         @include path-on();
     }
 }
-.arrow.on::after {
+.arrow.path-on::after {
     @include arrow-on();
 }
-.on {
+.path-on {
     .arrow {
         @include path-on();
     }
@@ -153,7 +177,7 @@ body {
         @include arrow-on();
     }
 }
-.two2one {
+.two-one {
     height: 10px;
     width: 60px;
     background-color: #999;
@@ -169,13 +193,61 @@ body {
         right: -10px;
         top: 0;
     }
-    &.on {
+    &.path-on {
         @include path-on();
     }
 }
-.two2one.on {
+.two-one.path-on,
+.one-three.path-on,
+.three-one.path-on {
     @include path-on();
     &::after {
+        @include path-on();
+    }
+}
+.one-three {
+    height: 10px;
+    width: 20px;
+    background-color: #999;
+    position: absolute;
+    left: 0;
+    top: 0;
+    &::after {
+        content: '';
+        width: 10px;
+        height: 210px;
+        background-color: #999;
+        position: absolute;
+        right: -2px;
+        top: -100px;
+    }
+}
+.three-one {
+    height: 10px;
+    width: 20px;
+    background-color: #999;
+    position: absolute;
+    left: 0;
+    top: 0;
+    .part {
+        height: 10px;
+        width: 25px;
+        background-color: #999;
+        position: absolute;
+    }
+    &::after {
+        content: '';
+        width: 10px;
+        height: 210px;
+        background-color: #999;
+        position: absolute;
+        left: -2px;
+        top: -100px;
+    }
+}
+.three-one.path-on {
+    @include path-on();
+    .part {
         @include path-on();
     }
 }
@@ -202,5 +274,34 @@ body {
     top: 175px;
 }
 #path5 {
-
+    left: 360px;
+    top: 125px;
+    .arrow:nth-child(1) {
+        left: 15px;
+        top: -100px;
+    }
+    .arrow:nth-child(2) {
+        left: 15px;
+        top: 0;
+    }
+    .arrow:nth-child(3) {
+        left: 15px;
+        top: 100px;
+    }
+}
+#path6 {
+    left: 570px;
+    top: 125px;
+    .part:nth-child(1) {
+        left: -20px;
+        top: -100px;
+    }
+    .part:nth-child(2) {
+        left: -20px;
+        top: 100px;
+    }
+    .arrow:nth-child(3) {
+        left: 0;
+        top: 0;
+    }
 }
