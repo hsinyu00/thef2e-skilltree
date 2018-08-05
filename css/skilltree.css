@@ -46,9 +46,19 @@ body { height: 100%; background: -webkit-gradient(linear, left top, left bottom,
 
 .arrow.on::after { border-color: transparent transparent transparent #fff; }
 
+.on .arrow { background-color: #fff; -webkit-box-shadow: 0 0 1px 1px rgba(255, 255, 255, 0.8); box-shadow: 0 0 1px 1px rgba(255, 255, 255, 0.8); }
+
+.on .arrow::after { border-color: transparent transparent transparent #fff; }
+
 .two2one { height: 10px; width: 60px; background-color: #999; position: absolute; left: 0; top: 0; }
 
 .two2one::after { content: ''; width: 10px; height: 65px; background-color: #999; position: absolute; right: -10px; top: 0; }
+
+.two2one.on { background-color: #fff; -webkit-box-shadow: 0 0 1px 1px rgba(255, 255, 255, 0.8); box-shadow: 0 0 1px 1px rgba(255, 255, 255, 0.8); }
+
+.two2one.on { background-color: #fff; -webkit-box-shadow: 0 0 1px 1px rgba(255, 255, 255, 0.8); box-shadow: 0 0 1px 1px rgba(255, 255, 255, 0.8); }
+
+.two2one.on::after { background-color: #fff; -webkit-box-shadow: 0 0 1px 1px rgba(255, 255, 255, 0.8); box-shadow: 0 0 1px 1px rgba(255, 255, 255, 0.8); }
 
 #path1 { left: 60px; top: 75px; }
 

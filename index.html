@@ -96,9 +96,8 @@ let Skill = {
     }
 }
 */
-let vm = new Vue({
-    el: "#app",
-    data: {
+let data = () => {
+    return {
         skills: [
             {
                 id: 'skill1',
@@ -176,19 +175,59 @@ let vm = new Vue({
             desc: '我是Mono喵，接下來你將領略UI的變換。喵。',
             icon: ''
         }
-    },
+    }
+}
+
+let vm = new Vue({
+    el: "#app",
+    data: data,
     methods: {
         clickSkill(index) {
+            let curSkill = this.skills[index]
 
-            this.currentDesc.title = this.skills[index].name
-            this.currentDesc.desc = this.skills[index].desc
-            this.currentDesc.icon = this.skills[index].src
+            if (index === 2 && curSkill.status === 'off') { // UX思維需自己啟動
+                curSkill.status = 'on'
+            }
+            if (curSkill.status === 'on') {
+                curSkill.status = 'clicked'
+
+                // turn on path of clicked skill
+                let pathToOpen = curSkill.path
+                document.getElementById(pathToOpen).classList.add('on')
+
+                // turn on children of clicked skill, if clicked skill is already on
+                let children = curSkill.children
+                let siblings = curSkill.siblings
+                let sibNotClicked = 0
+
+                if (siblings.length > 0) {
+                    // 如果有兄弟，檢查是否兄弟已全選
+                    siblings.forEach(sib => {
+                        for (let x = 0; x < this.skills.length; x++) {
+                            if (this.skills[x].id === sib && this.skills[x].status !== 'clicked') {
+                                sibNotClicked = sibNotClicked + 1  // 只要有兄弟未選，立刻改 false
+                            }
+                        }
+                    });
+                }
+                if (siblings.length === 0 || sibNotClicked === 0) {
+                    // 若無兄弟，或兄弟已全選，打開孩子
+                    children.forEach(child => {
+                        for (let i = 0; i < this.skills.length; i++) {
+                            if (this.skills[i].id === child) {
+                                this.skills[i].status = 'on'
+                            }
+                        }
+                    });
+                }
+            }
+
+
+            this.currentDesc.title = curSkill.name
+            this.currentDesc.desc = curSkill.desc
+            this.currentDesc.icon = curSkill.src
         }
     }
-
-    //components: {
-    //    Skill
-    //}
 });
 
 </script>

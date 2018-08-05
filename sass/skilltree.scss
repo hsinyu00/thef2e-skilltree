@@ -115,6 +115,13 @@ body {
     top: 0;
 }
 
+@mixin path-on() {
+    background-color: #fff;
+    box-shadow: 0 0 1px 1px rgba(255, 255, 255, 0.8);
+}
+@mixin arrow-on() {
+    border-color: transparent transparent transparent #fff;
+}
 .arrow {
     height: 10px;
     width: 25px;
@@ -132,11 +139,18 @@ body {
         top: -5px;
     }
     &.on {
-        background-color: #fff;
-        box-shadow: 0 0 1px 1px rgba(255, 255, 255, 0.8);
+        @include path-on();
     }
-    &.on::after {
-        border-color: transparent transparent transparent #fff;
+}
+.arrow.on::after {
+    @include arrow-on();
+}
+.on {
+    .arrow {
+        @include path-on();
+    }
+    .arrow::after {
+        @include arrow-on();
     }
 }
 .two2one {
@@ -154,6 +168,15 @@ body {
         position: absolute;
         right: -10px;
         top: 0;
+    }
+    &.on {
+        @include path-on();
+    }
+}
+.two2one.on {
+    @include path-on();
+    &::after {
+        @include path-on();
     }
 }
 
