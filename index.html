@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta http-equiv="content-type" content="text/html;charset=UTF-8">
+    <meta http-equiv="content-language" content="zh-tw">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=1">
+    <title>Skill Tree - THE F2E</title>
+    <link rel="stylesheet" href="https://unpkg.com/normalize.css@8.0.0/normalize.css">
+    <link rel="stylesheet" href="css/skilltree.css">
+    <script src="https://unpkg.com/vue@2.5.16/dist/vue.js"></script>
+    <style>
+        [v-cloak] {
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="header">
+        介面設計師轉職之路<br>UI Designer Road Map
+    </div>
+    <div id="app" class="container">
+        <div v-for="(item,index) in skills"
+             :id="item.id"
+             :class="item.status"
+             @click="clickSkill(index)"
+             class="skill">
+            <div class="icon" :style="{ backgroundImage:'url('+item.src+')' }"></div>
+            <div :class="item.name">{{ item.name }}</div>
+        </div>
+
+        <div id="path1" class="arrow"></div>
+        <div id="path2" class="two2one">
+            <div class="arrow"></div>
+        </div>
+        <div id="path3" class="arrow"></div>
+        <div id="path4" class="arrow"></div>
+        <div id="path5" class="one2three">
+            <div class="arrow"></div>
+        </div>
+
+        <div class="desc-area">
+            <img class="icon" :src="currentDesc.icon">
+            <h2 class="title">{{ currentDesc.title }}</h2>
+            {{ currentDesc.desc }}
+        </div>
+    </div>
+</body>
+
+<script>
+/*
+let Skill = {
+    template: `
+        <div :id="id"
+             :class="status"
+             @click="clickSkill(index)"
+            class="skill">
+            <div class="icon"></div>
+            <div :class="name">{{ name }}</div>
+        </div>
+        `,
+    props: {
+        id:  {
+            type: String,
+            required: true
+        },
+        name: {
+            type: String,
+            required: true
+        },
+        status: {
+            type: String,
+            required: true
+        },
+        desc: {
+            type: String,
+            required: true
+        },
+        siblings: {
+            type: Array,
+            required: false
+        },
+        children: {
+            type: Array,
+            required: false
+        },
+        path: {
+            type: String,
+            required: false
+        },
+        index: {
+            type: Number,
+            required: true
+        }
+    }
+}
+*/
+let vm = new Vue({
+    el: "#app",
+    data: {
+        skills: [
+            {
+                id: 'skill1',
+                name: '設計規範',
+                status: 'on',
+                desc: 'UI設計跟平面設計最大的不同是，因為具有功能、要被操作且須遵守一些易用性規範，雖然難啃但不失為初心者必備武器。',
+                src: 'images/img_blade-1.png',
+                siblings: [],
+                children: ['skill2'],
+                path: 'path1'
+            },
+            {
+                id: 'skill2',
+                name: '爬梳乾貨',
+                status: 'off',
+                desc: 'UI/UX這行目前在台灣沒什麼完全的大學科系可選擇，與 IT 產業相同的是需仰賴大量的閱讀與自學，不管是新手村或職業人士都是要每天持續學習。',
+                src: 'images/img_meat.png',
+                siblings: ['skill5'],
+                children: ['skill6'],
+                path: 'path2'
+            },
+            {
+                id: 'skill3',
+                name: 'UX思維',
+                status: 'off',
+                src: 'images/img_shield.png',
+                desc: '使用者體驗 (User Experience) 與使用者介面 (User Interface) 的領域實在是有些不同，這邊僅點破一個常見誤會：UX設計師每天面對的是更多的統計資料、調研與分析，爬梳脈絡與心理預測，跟不少同學響往的「設計師(Designer)」的華麗工作日常不太一樣，盯著螢幕畫設計稿、著重視覺與美感，創造讓心情愉悅的畫面相關工作才是 UI設計師的工作內容。',
+                siblings: [],
+                children: ['skill4'],
+                path: 'path3'
+            },
+            {
+                id: 'skill4',
+                name: '設計思考',
+                status: 'off',
+                src: 'images/img_hat.png',
+                desc: '設計思考（Design Thinking）是一個以人為本的解決問題方法論，透過從人的需求出發，為各種議題尋求創新解決方案，並創造更多的可能性。IDEO設計公司總裁提姆·布朗曾在《哈佛商業評論》定義：「設計思考是以人為本的設計精神與方法，考慮人的需求、行為，也考量科技或商業的可行性。」',
+                siblings: [],
+                children: ['skill5'],
+                path: 'path4'
+            },
+            {
+                id: 'skill5',
+                name: '心理學',
+                status: 'off',
+                src: 'images/img_horn.png',
+                desc: '著名的人因工程學者，同時也是世紀最有影響力之一的設計師 Donald A. Normand 在《設計的心理學》中呼籲，設計師應該為了產品的「易用性」而奮鬥，否則費盡心思製造出功能多變、使用繁雜的產品，即使外觀漂亮，也只會讓消費者徒增困擾。',
+                siblings: ['skill2'],
+                children: ['skill6'],
+                path: 'path2'
+            },
+            {
+                id: 'skill6',
+                name: '線框稿',
+                status: 'off',
+                src: 'images/img_hammer.png',
+                desc: '其實就是設計草稿，只是在產品設計上為了更擬真，一般指的線框稿(Wireframe)都會是需要可以點擊交互的，製作線框稿的目的著重在畫面間的流程與操作，並透過這份由簡單線條與去視覺化的草圖去與工程師、專案經理等團隊成員溝通，確保大家對產品最後的想像是一致的。',
+                siblings: [],
+                children: ['skill7', 'skill8', 'skill9'],
+                path: 'path5'
+            },
+            {
+                id: 'skill7',
+                name: '插畫',
+                src: 'images/img_illustration.png',
+                status: 'off',
+                desc: '插畫在今年的網頁視覺上存在感愈來愈重，愈來愈多的科技公司官網及產品流程皆採用插畫來取代以往的扁平、簡約風格，像是 Slack 、Dropbox跟 Shopify等，帶來更有溫度的使用體驗，而且也更有趣，如果你是平面設計出身或本來就喜歡插畫，在設計介面的時候可以選擇自產素材，創作更具備個人風格的作品。',
+                siblings: ['skill8', 'skill9', 'skill10', 'skill11', 'skill12'],
+                children: ['skill13'],
+                path: 'path6'
+            }
+        ],
+        currentDesc: {
+            title: '安安',
+            desc: '我是Mono喵，接下來你將領略UI的變換。喵。',
+            icon: ''
+        }
+    },
+    methods: {
+        clickSkill(index) {
+
+            this.currentDesc.title = this.skills[index].name
+            this.currentDesc.desc = this.skills[index].desc
+            this.currentDesc.icon = this.skills[index].src
+        }
+    }
+
+    //components: {
+    //    Skill
+    //}
+});
+
+</script>
+</html>
